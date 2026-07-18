@@ -166,6 +166,13 @@
             25% { transform: translateX(-6px); }
             75% { transform: translateX(6px); }
         }
+        img {
+    max-width: 100%;     /* Forces the image to never be wider than the white card */
+    height: auto;        /* Keeps the image aspect ratio perfect so it doesn't look stretched */
+    display: block;      /* Prevents layout alignment gaps */
+    margin: 0 auto 15px; /* Centers the image perfectly and adds a little space below it */
+    border-radius: 15px; /* Matches the cute rounded corners of your layout */
+}
     </style>
 </head>
 <body>

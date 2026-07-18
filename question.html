@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Love Quiz 💕</title>
+    <style>
+        body {
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts Background Animation */
+        .hearts-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            color: #ff8fa3;
+            animation: float 6s infinite linear;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        /* Premium Glassmorphic Card Container */
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            width: 450px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(255, 143, 163, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #ff4d6d;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #c9184a;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Polaroid / Cute Frame Style for Photos */
+        .quiz-img {
+            width: 100%;
+            max-height: 230px;
+            object-fit: cover;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+            border: 4px solid white;
+        }
+
+        /* Typing Input Field Style */
+        .text-input {
+            width: 85%;
+            padding: 12px 20px;
+            border: 2px solid #ffccd5;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .text-input:focus {
+            border-color: #ff4d6d;
+            box-shadow: 0 0 8px rgba(255, 77, 109, 0.25);
+        }
+
+        /* Core Button Layout */
+        .btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+        }
+        .btn:hover {
+            background-color: #ff758f;
+            transform: translateY(-2px);
+        }
+
+        /* Multiple Choice Grid Layout */
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .option-btn {
+            background: white;
+            border: 2px solid #ffccd5;
+            padding: 14px;
+            border-radius: 15px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #590d22;
+            transition: 0.2s ease;
+        }
+        .option-btn:hover {
+            background: #fff0f3;
+            border-color: #ff4d6d;
+            transform: scale(1.02);
+        }
+
+        /* Hint Trigger Styling */
+        .hint-text {
+            font-size: 13px;
+            color: #ff758f;
+            font-style: italic;
+            margin-top: 18px;
+            cursor: pointer;
+            text-decoration: underline;
+            display: inline-block;
+        }
+
+        /* Wobbly Error Shake Animation */
+        .error-msg {
+            color: #ff0a54;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sweet floating background decoration elements -->
+    <div class="hearts-bg">
+        <div class="heart" style="left: 8%; animation-delay: 0s;">💖</div>
+        <div class="heart" style="left: 23%; animation-delay: 2s; font-size: 28px;">✨</div>
+        <div class="heart" style="left: 52%; animation-delay: 1s;">❤️</div>
+        <div class="heart" style="left: 68%; animation-delay: 4.5s; font-size: 18px;">🌸</div>
+        <div class="heart" style="left: 88%; animation-delay: 3s;">💕</div>
+    </div>
+
+    <div class="card">
+        <div class="progress">Question {{ question.id }} of {{ total }}</div>
+
+        <!-- Target current item context picture inside static mapping -->
+        {% if question.image %}
+            <img src="{{ url_for('static', filename=question.image) }}" class="quiz-img" alt="Us">
+        {% endif %}
+
+        <h2>{{ question.q }}</h2>
+
+        {% if error %}
+            <div class="error-msg">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% if question.type == 'multiple_choice' %}
+                <!-- Render Multiple Choice Layout -->
+                <div class="options-container">
+                    {% for option in question.options %}
+                        <button type="submit" name="answer" value="{{ option }}" class="option-btn">
+                            {{ option }}
+                        </button>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <!-- Render Text Input / Q&A Layout -->
+                <input type="text" name="answer" placeholder="Type your answer here..." class="text-input" required autocomplete="off">
+                <br>
+                <button type="submit" class="btn">Submit Answer 💝</button>
+            {% endif %}
+        </form>
+
+        <div class="hint-text" onclick="alert('💡 Hint: {{ question.hint }}')">Need a hint? Click here!</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy 8th Monthsary! 💕</title>
+    <style>
+        body {
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .hearts-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            color: #ff8fa3;
+            animation: float 6s infinite linear;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            width: 550px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(255, 143, 163, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-align: center;
+            z-index: 10;
+            margin: 20px 0;
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .monthsary-badge {
+            display: inline-block;
+            background: #ff4d6d;
+            color: white;
+            padding: 6px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.2);
+        }
+
+        .letter-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: left;
+            box-shadow: inset 0 0 10px rgba(255, 204, 213, 0.2), 0 4px 12px rgba(0,0,0,0.03);
+            border-left: 5px solid #ff4d6d;
+        }
+
+        .lang-section {
+            margin-bottom: 25px;
+        }
+        .lang-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .lang-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #ff758f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #ffccd5;
+            padding-bottom: 3px;
+        }
+
+        .letter-text {
+            color: #590d22;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .sign-off {
+            text-align: right;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #c9184a;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-bg">
+        <div class="heart" style="left: 8%; animation-delay: 0s;">💖</div>
+        <div class="heart" style="left: 25%; animation-delay: 2s;">✨</div>
+        <div class="heart" style="left: 55%; animation-delay: 1s;">❤️</div>
+        <div class="heart" style="left: 85%; animation-delay: 3s;">💕</div>
+    </div>
+
+    <div class="card">
+        <div class="monthsary-badge">Happy 8th Monthsary! 🌸</div>
+
+        <div class="letter-container">
+            <!-- English Section -->
+            <div class="lang-section">
+                <div class="lang-title">English 🇬🇧</div>
+                <p class="letter-text">
+                    I love you so much, babe. Thank you for coming into my life.
+                    I will always be by your side through ups and downs.
+                    I want to support you in every situation. Happy 8th Monthsary!
+                </p>
+            </div>
+
+            <!-- Vietnamese Section -->
+            <div class="lang-section">
+                <div class="lang-title">Tiếng Việt 🇻🇳</div>
+                <p class="letter-text">
+                    Em yêu anh nhiều lắm, anh yêu. Cảm ơn anh đã bước đến trong cuộc đời em.
+                    Em sẽ luôn ở bên cạnh anh, cùng anh vượt qua mọi thăng trầm.
+                    Em muốn được ủng hộ và đồng hành cùng anh trong mọi hoàn cảnh. Chúc mừng 8 tháng bên nhau của chúng mình!
+                </p>
+            </div>
+
+            <div class="sign-off">With all my love, Bella Polar Bear 🐻❤️</div>
+        </div>
+    </div>
+
+</body>
+</html>
